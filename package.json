@@ -1,0 +1,24 @@
+{
+  "name": "workplace-manager-ansari",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaansari123/workplace-manager-Ansari.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaansari123/workplace-manager-Ansari/issues"
+  },
+  "homepage": "https://github.com/aaansari123/workplace-manager-Ansari#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
