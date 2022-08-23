@@ -80,7 +80,28 @@ function viewAllRoles(){
         init();
       });
 }
-
+function updateEmployeeRole(){
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'name',
+            message: 'Which Employee will you update',
+            choices: currentEmployees()
+        },
+        {
+            type: 'list',
+            name: 'new_role',
+            message: 'What is their new role?',
+            choices: currentRoles()
+        }
+    ]).then((answers) => {
+        console.log( answers);
+        // db.query('INSERT INTO department (names) VALUES (?)', answers.department,function (err, results) {
+        //     console.table(results);
+        //     init();
+        //   })
+    })
+}
 function addDepartment(){
     inquirer.prompt([
         {
@@ -92,7 +113,7 @@ function addDepartment(){
     .then((answers) => {
         console.log( answers.department);
         db.query('INSERT INTO department (names) VALUES (?)', answers.department,function (err, results) {
-            console.table(results);
+            
             init();
           })
     })
@@ -119,7 +140,7 @@ function addRole(){
     ])
     .then((answers) => {
         db.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [answers.title, answers.salary, 3], function (err, results) {
-            console.table(results);
+            
             init();
           })
     })
@@ -134,15 +155,9 @@ function currentDepartments(){
       });
     return currentDepartment;
 }
-function currentRoles(){
-    let currentRoles = [];
-    db.query('SELECT DISTINCT(title) FROM roles', function (err, results) {
-        for(let i = 0; i< results.length; i++){
-            currentRoles.push(results[i].title);
-        }
-      });
-    return currentRoles;
-}
+
+
+
 
 function addEmployee(){
     inquirer.prompt([
@@ -166,9 +181,40 @@ function addEmployee(){
     .then((answers) => {
         console.log(answers);
         db.query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?, ?, ?)', [answers.first_name, answers.last_name, 3], function (err, results) {
-            console.table(results);
+            
             init();
           })
     })
 }
+function currentRoles(){
+    let currentRoles = [];
+    db.query('SELECT DISTINCT(title) FROM roles', function (err, results) {
+        for(let i = 0; i< results.length; i++){
+            currentRoles.push(results[i].title);
+        }
+      });
+    return currentRoles;
+}
 
+// let currentEmployee = [];
+// function currentEmployees(){
+//     db.query('SELECT first_name, last_name FROM employee', function (err, results) {
+//         for(let i = 0; i< results.length; i++){
+//             currentEmployee.push(results[i].first_name + " " + results[i].last_name);
+//         }
+//       });
+//     return currentEmployee;
+// }
+// currentEmployees();
+// console.log(currentEmployee)
+// function departmentID(department){
+//     return new Promise(function(resolve,reject){
+//         db.query('SELECT (id) FROM department where names = ?', department, function (err, results) {
+//               });
+//     }).then((results)=>{
+//         return results;
+//     })
+   
+// }
+
+// departmentID("Sales");
